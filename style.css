@@ -11,7 +11,7 @@ body {
   padding: 0;
   background-color: var(--secondary-color);
 }
-button,.slider-container {
+button,.slider-container, .quick-contact {
     border-radius: 15px;
 }
 
@@ -118,4 +118,11 @@ button,.slider-container {
 
 .welcome-section p {
     font-size: 1.2rem;
+}
+
+/*Quick Contact Button*/
+.quick-contact{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }
