@@ -11,7 +11,7 @@ body {
   padding: 0;
   background-color: var(--secondary-color);
 }
-button,.slider {
+button,.slider-container {
     border-radius: 15px;
 }
 
@@ -82,11 +82,11 @@ button,.slider {
     position: relative;
     padding: 30px;
     width: 90%;
-    max-width: 500px;
-    background: #ffffff;
+    max-width: 700px;
+    background: #F8F4F0;
     padding: 50px 60px;
-    border: 3px solid #d73939;
-    margin: 50px auto;
+    border: none;
+    margin: 40px auto;
     overflow: hidden;
 }
 .slider {
@@ -108,23 +108,6 @@ button,.slider {
     color: #632727;
     text-align: center;
     font-style: italic;
-}
-
-/*Content Row*/
-.content-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
-    padding: 20px;
-}
-
-.welcome-section {
-    flex: 1;
-}
-
-.slider-container {
-    flex: 1;
 }
 
 /*Welcome Section*/
