@@ -1,14 +1,18 @@
 /*main styles*/
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #ffffff;
-  --font-family: 'VErdana', sans-serif;
+    --primary-color: #4A7C59;
+    --secondary-color: #F8F4F0;
+    --accent-color: #D8E2DC;
+    --text-color: #2D3436;
 }
 body {
-  font-family: var(--font-family);
+ font-family: 'Trebuchet MS', sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--secondary-color);
+}
+button,.slider {
+    border-radius: 15px;
 }
 
 /* Navigation Bar */
@@ -64,9 +68,19 @@ body {
     color: #300404;
 }
 
+/*Welcome Section*/
+.welcome-section {
+    padding: 50px;
+    text-align: center;
+    font-size: 28px;
+    color: #632727;
+}
+
 /*Quote Box*/
 .slider-container {
+    transform: translateX(10px);
     position: relative;
+    padding: 30px;
     width: 90%;
     max-width: 500px;
     background: #ffffff;
@@ -74,4 +88,51 @@ body {
     border: 3px solid #d73939;
     margin: 50px auto;
     overflow: hidden;
+}
+.slider {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/*Quote Text & Author*/
+.quote{
+    font-size: 24px;
+    color: #632727;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.quote-author {
+    font-size: 18px;
+    color: #632727;
+    text-align: center;
+    font-style: italic;
+}
+
+/*Content Row*/
+.content-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 20px;
+}
+
+.welcome-section {
+    flex: 1;
+}
+
+.slider-container {
+    flex: 1;
+}
+
+/*Welcome Section*/
+.welcome-section h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 1.2rem;
 }
