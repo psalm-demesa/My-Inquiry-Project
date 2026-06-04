@@ -1,6 +1,6 @@
 /*main styles*/
 :root {
-    --primary-color: #4A7C59;
+    --primary-color: hsl(11, 76%, 61%);
     --secondary-color: #F8F4F0;
     --accent-color: #D8E2DC;
     --text-color: #2D3436;
@@ -20,8 +20,13 @@ button,.slider-container, .quick-contact {
     background-color: #d73939;
 
     display: flex;
+
     justify-content: space-between;
     align-items: center;
+
+    position: fixed;
+    top: 0;
+    width: 97%;
 
     padding: 15px 30px;
 }
@@ -110,19 +115,73 @@ button,.slider-container, .quick-contact {
     font-style: italic;
 }
 
+/*Content Section*/
+.content-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 50px;
+    gap: 0px;
+    margin-top: 40px;
+}
+
+.quick-contact {
+    flex: 1;
+    max-width: 400px;
+}
+
+.slider-container {
+    flex: 1;
+    max-width: 550px;
+}
+
 /*Welcome Section*/
 .welcome-section h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
+    padding:0;
+    font-size: 4rem;
+    margin-top: 100px;
+    margin-bottom: 20px;
 }
 
 .welcome-section p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 /*Quick Contact Button*/
-.quick-contact{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+.quick-contact {
+    background-color: #e46b59;
+    color: white;
+    padding: 30px;
+    width: 450px;
+    margin: 40px auto;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.quick-contact h3 {
+    margin: 0 0 10px;
+    font-size: 1.8rem;
+}
+
+.quick-contact p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.contact-button {
+    background-color: white;
+    color: #7e613a;
+    border: none;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
