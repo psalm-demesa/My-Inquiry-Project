@@ -91,7 +91,7 @@ button,.slider-container, .quick-contact {
     background: #F8F4F0;
     padding: 50px 60px;
     border: none;
-    margin: 40px auto;
+    margin: auto;
     overflow: hidden;
 }
 .slider {
@@ -126,11 +126,13 @@ button,.slider-container, .quick-contact {
 
 .quick-contact {
     flex: 1;
+    width: 100%;
     max-width: 500px;
 }
 
 .slider-container {
     flex: 1;
+    width: 100%;
     max-width:700px;
 }
 
@@ -204,6 +206,7 @@ button,.slider-container, .quick-contact {
 /*About Page*/
 .about-section {
     padding: 50px;
+    width: 100%;
     max-width: 900px;
     margin-top: 200px;
     margin: 0 auto;
