@@ -3,6 +3,7 @@ function toggleMenu() {
     document
         .getElementById("nav-links")
         .classList.toggle("active");
+        alert("Menu toggled!"); // This is just for testing, you can remove it later
 }
 
 
