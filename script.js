@@ -1,3 +1,11 @@
+/* JavaScript for the responsive navigation menu */
+function toggleMenu() {
+    document
+        .getElementById("navLinks")
+        .classList.toggle("active");
+}
+
+
 /* JavaScript for the slideshow */
 
 const slides = document.querySelectorAll('.slide');

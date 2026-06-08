@@ -67,6 +67,37 @@ button,.slider-container, .quick-contact {
 
     transition: 0.3s;
 }
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        gap: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
 
 /* Hover Effect */
 .nav-links a:hover {
