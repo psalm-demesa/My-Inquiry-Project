@@ -1,7 +1,7 @@
 /* JavaScript for the responsive navigation menu */
 function toggleMenu() {
     document
-        .getElementById("navLinks")
+        .getElementById("nav-links")
         .classList.toggle("active");
 }
 
