@@ -37,3 +37,21 @@ setInterval(() => {
     currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
     showSlide(currentSlide);
 }, 5000); // This changes slide every 5 seconds
+
+/* JavaScript for the contact form validation */
+const contactForm = document.getElementById('contact-form');
+
+contactForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (name === '' || email === '' || message === '') {
+        alert('Please fill in all fields.');
+    } else if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+    } else {
+        alert('Thank you for your message!');
+        contactForm.reset(); // Reset the form after submission
+    }   
+});
