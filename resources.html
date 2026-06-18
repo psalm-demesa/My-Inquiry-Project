@@ -74,6 +74,43 @@
   <div class="school-counsellors">
     <h1>🗣️ Talk to a Counsellor</h1>
     <button class="talk-button" onclick="openPopup('contact-popup')">Contact Us</button>
+
+          <!--School Contacts-->
+      <div id="contact-popup" class="pop-up">
+        <div class="pop-up-content">
+
+          <span class="close"
+            onclick="closePopup('contact-popup')">&times;</span>
+
+            <h2>Contact a Counsellor</h2>
+
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+
+                <input type="email" id="email" placeholder="Your Email" required>
+
+              <select id="counsellor" required>
+                  <option value="">Choose a Counsellor</option>
+                  <option value="demesap@wsc.school.nz">Psalm de Mesa</option>
+                  <option value="poupoures@wsc.school.nz">Sue Poupouare</option>
+                  <option value="johnsonk@wsc.school.nz">Kat Johnson</option>
+                  <option value="munrol@wsc.school.nz">Leisa Munro</option>
+                  <option value="quedleyr@wsc.school.nz">Rochelle Quedley</option>
+                </select>
+
+                <textarea
+                    id="message"
+                    placeholder="How can we help?"
+                    rows="5"
+                    required></textarea>
+
+                <button type="submit" mail>Send Message</button>
+            </form>
+        </div>
+
+      </div>
+      
+
   </div>
 
   <div class="support-groups">
@@ -87,45 +124,6 @@
   </div>
 </div>
 
-<!--School Contacts-->
-  <div id="contact-popup" class="pop-up">
-    <div class="pop-up-content">
-
-       <span class="close"
-        onclick="closePopup('contact-popup')">&times;</span>
-
-        <h2>Contact a Counsellor</h2>
-
-        <form id="contactForm">
-            <input type="text" id="name" placeholder="Your Name" required>
-
-            <input type="email" id="email" placeholder="Your Email" required>
-
-           <select id="counsellor" required>
-              <option value="">Choose a Counsellor</option>
-              <option value="demesap@wsc.school.nz">Psalm de Mesa</option>
-              <option value="poupoures@wsc.school.nz">Sue Poupouare</option>
-              <option value="johnsonk@wsc.school.nz">Kat Johnson</option>
-              <option value="munrol@wsc.school.nz">Leisa Munro</option>
-              <option value="quedleyr@wsc.school.nz">Rochelle Quedley</option>
-            </select>
-
-            <textarea
-                id="message"
-                placeholder="How can we help?"
-                rows="5"
-                required></textarea>
-
-            <button type="submit" mail>Send Message</button>
-        </form>
-    </div>
-
-  </div>
-
-   <div id="support-groups" class="support-groups">
-
-   </div>
-</div>
 
 </body>
 </html>
