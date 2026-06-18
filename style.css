@@ -376,3 +376,49 @@ button,.slider-container, .quick-contact {
 
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+/*Popup Styles*/
+.pop-up {
+    display: none;
+    position: fixed;
+    inset: 0;
+
+    background: rgba(186, 134, 134, 0.4);
+    backdrop-filter: blur(5px);
+
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.pop-up .popup-content {
+   background: white;
+    padding: 2rem;
+    border-radius: 20px;
+
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+    animation: popupFade 1s ease;
+}
+
+@keyframes pop-upFade {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}

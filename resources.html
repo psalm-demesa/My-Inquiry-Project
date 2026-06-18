@@ -73,12 +73,12 @@
 <div class="resources-content">
   <div class="school-counsellors">
     <h1>🗣️ Talk to a Counsellor</h1>
-    <button class="talk-button" onclick="window.location.href='resources.html#school-contacts'">Contact Us</button>
+    <button class="talk-button" onclick="openPopup('contact-popup')">Contact Us</button>
   </div>
 
   <div class="support-groups">
     <h1>🗣️ Support Groups</h1>
-    <button class="talk-button" onclick="window.location.href='resources.html#support-groups'">Find a Group</button>
+    <button class="talk-button" onclick="openPopup('support-groups')">Find a Group</button>
   </div>
 
   <div class="crisis-helplines">
@@ -88,17 +88,38 @@
 </div>
 
 <!--School Contacts-->
-  <div id="school-contacts" class="school-contacts">
-    <h1> Contact Information</h1>
-    <h3>Western Springs College - Nga Puna O Waiorea</h3>
-    <p>Sue Poupouare - School Counsellor</p>
-    <p>Email: <a href="mailto:poupoures@wsc.school.nz">poupoures@wsc.school.nz</a></p>
-    <p>Kat Johnson - School Counsellor</p>
-    <p>Email: <a href="mailto:johnsonk@wsc.school.nz">johnsonk@wsc.school.nz</a></p>
-    <p>Leisa Munro - School Counsellor</p>
-    <p>Email: <a href="mailto:munrol@wsc.school.nz">munrol@wsc.school.nz</a></p>
-    <p> Rochelle Quedley - School Counsellor</p>
-    <p>Email: <a href="mailto:quedleyr@wsc.school.nz">quedleyr@wsc.school.nz</a></p>
+  <div id="contact-popup" class="pop-up">
+    <div class="pop-up-content">
+
+       <span class="close"
+        onclick="closePopup('contact-popup')">&times;</span>
+
+        <h2>Contact a Counsellor</h2>
+
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+
+            <input type="email" id="email" placeholder="Your Email" required>
+
+           <select id="counsellor" required>
+              <option value="">Choose a Counsellor</option>
+              <option value="demesap@wsc.school.nz">Psalm de Mesa</option>
+              <option value="poupoures@wsc.school.nz">Sue Poupouare</option>
+              <option value="johnsonk@wsc.school.nz">Kat Johnson</option>
+              <option value="munrol@wsc.school.nz">Leisa Munro</option>
+              <option value="quedleyr@wsc.school.nz">Rochelle Quedley</option>
+            </select>
+
+            <textarea
+                id="message"
+                placeholder="How can we help?"
+                rows="5"
+                required></textarea>
+
+            <button type="submit" mail>Send Message</button>
+        </form>
+    </div>
+
   </div>
 
    <div id="support-groups" class="support-groups">
