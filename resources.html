@@ -72,7 +72,7 @@
 <!-- Resources Content -->
 <div class="resources-content">
   <div class="school-counsellors">
-    <h1>🗣️ Talk to a Counsellor</h1>
+    <h1>🗣️ Counsellors</h1>
     <button class="talk-button" onclick="openPopup('contact-popup')">Contact Us</button>
 
           <!--School Contacts-->
@@ -96,6 +96,7 @@
                   <option value="johnsonk@wsc.school.nz">Kat Johnson</option>
                   <option value="munrol@wsc.school.nz">Leisa Munro</option>
                   <option value="quedleyr@wsc.school.nz">Rochelle Quedley</option>
+                  <option value="escobara@wsc.school.nz">Alex Escobar</option>
                 </select>
 
                 <textarea
@@ -109,19 +110,43 @@
         </div>
 
       </div>
-      
+
 
   </div>
 
   <div class="support-groups">
     <h1>🗣️ Support Groups</h1>
     <button class="talk-button" onclick="openPopup('support-groups')">Find a Group</button>
+          <!--Support Groups-->
+      <div id="support-groups" class="pop-up">
+        <div class="pop-up-content">
+
+          <span class="close"
+            onclick="closePopup('support-groups')">&times;</span>
+
+            <h2>Available Support Groups</h2>
+            <ul>
+                <li><strong>Student Support:</strong>The college is organised into five houses – Ātea, Kāpura, Moana, Oranga and Whenua.</li>
+                <li><strong>Heads of House:</strong> Each has a Head of House who is responsible for the support and guidance of the students in that house.</li>
+                <li><strong>School Groups and Clubs:</strong> A peer-led group where students can discuss challenges and offer support. Meets every Wednesday at 3 PM.</li>
+            </ul>
+        </div>
+
+      </div>
   </div>
 
   <div class="crisis-helplines">
     <h1>📞 Crisis Helplines</h1>
     <button class="talk-button" onclick="window.location.href='resources.html#crisis-helplines'">Call Now</button>
   </div>
+</div>
+
+<!--Games and Relaxing tools-->
+<div class="games-and-tools">
+  <button class="games-button" onclick="window.location.href='games.html'">
+    <h1>🎮 Games and Relaxing Tools</h1>
+    <p>Check out our collection of games and relaxing activities to help you unwind and have fun!</p>
+  </button>
 </div>
 
 
