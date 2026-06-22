@@ -88,3 +88,118 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+/* ---------------- POPUPS ---------------- */
+function openPopup(id){
+    document.getElementById(id).style.display = "block";
+
+    // start snake only when popup opens
+    if (id === "snake") startSnake();
+}
+
+function closePopup(id){
+    document.getElementById(id).style.display = "none";
+}
+
+/* ---------------- SNAKE ---------------- */
+let canvas, ctx;
+let snake, dir, food, gameInterval;
+const box = 15;
+
+function startSnake(){
+
+    // prevent multiple intervals stacking
+    if (gameInterval) clearInterval(gameInterval);
+
+    canvas = document.getElementById("game");
+    ctx = canvas.getContext("2d");
+
+    snake = [{x: 5*box, y: 5*box}];
+    dir = "RIGHT";
+    food = spawnFood();
+
+    document.onkeydown = (e) => {
+        if(e.key === "ArrowLeft") dir = "LEFT";
+        if(e.key === "ArrowRight") dir = "RIGHT";
+        if(e.key === "ArrowUp") dir = "UP";
+        if(e.key === "ArrowDown") dir = "DOWN";
+    };
+
+    gameInterval = setInterval(drawGame, 150);
+}
+
+function spawnFood(){
+    return {
+        x: Math.floor(Math.random()*20)*box,
+        y: Math.floor(Math.random()*20)*box
+    };
+}
+
+function drawSnake(){
+    ctx.fillStyle = "lime";
+    snake.forEach(s => ctx.fillRect(s.x, s.y, box, box));
+}
+
+function drawGame(){
+
+    ctx.clearRect(0,0,300,300);
+
+    let head = {...snake[0]};
+
+    if(dir==="LEFT") head.x -= box;
+    if(dir==="RIGHT") head.x += box;
+    if(dir==="UP") head.y -= box;
+    if(dir==="DOWN") head.y += box;
+
+    // restart if hits wall
+    if(head.x < 0 || head.y < 0 || head.x >= 300 || head.y >= 300){
+        startSnake();
+        return;
+    }
+
+    if(head.x === food.x && head.y === food.y){
+        food = spawnFood();
+    } else {
+        snake.pop();
+    }
+
+    snake.unshift(head);
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(food.x, food.y, box, box);
+
+    drawSnake();
+}
+
+/* ---------------- WORDLE ---------------- */
+const answer = "CODE";
+
+function checkWord(){
+    let g = document.getElementById("guess").value.toUpperCase();
+
+    document.getElementById("wordleResult").innerText =
+        (g === answer) ? "Correct!" : "Try again!";
+}
+
+/* ---------------- RPS ---------------- */
+function play(user){
+    const choices = ["rock","paper","scissors"];
+    const bot = choices[Math.floor(Math.random()*3)];
+
+    let result;
+
+    if(user === bot){
+        result = "Draw!";
+    } else if(
+        (user==="rock" && bot==="scissors") ||
+        (user==="paper" && bot==="rock") ||
+        (user==="scissors" && bot==="paper")
+    ){
+        result = "You win!";
+    } else {
+        result = "You lose!";
+    }
+
+    document.getElementById("rpsResult").innerText =
+        `Bot chose ${bot}. ${result}`;
+}
