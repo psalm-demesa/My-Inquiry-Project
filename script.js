@@ -58,11 +58,11 @@ contactForm.addEventListener('submit', function(event) {
 
 // JS for Contact Popup
 function openPopup(id) {
-    document.getElementById(id).style.display = "flex";
+    document.getElementById(id).classList.add("active");
 }
 
 function closePopup(id) {
-    document.getElementById(id).style.display = "none";
+    document.getElementById(id).classList.remove("active");
 }
 document.addEventListener("DOMContentLoaded", () => {
 

@@ -368,6 +368,7 @@ button,.slider-container, .quick-contact {
 .school-counsellors,
 .support-groups,
 .crisis-helplines {
+    position: relative;
     width: 300px;
     padding: 25px;
     background: white;
@@ -397,18 +398,27 @@ button,.slider-container, .quick-contact {
 .pop-up {
     display: none;
     position: fixed;
+    top: 0;
+    left:0;
     inset: 0;
+
+    width: 100vw;
+    height: 100vh;
 
     background: rgba(186, 134, 134, 0.4);
     backdrop-filter: blur(5px);
 
-    justify-content: center;
-    align-items: center;
+
     z-index: 1000;
 }
+.pop-up.active {
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+}
 
-.pop-up .popup-content {
-   background: #e46b59;
+.pop-up-content{
+    background: #eecfca;
     padding: 2rem;
     border-radius: 20px;
 
@@ -416,21 +426,19 @@ button,.slider-container, .quick-contact {
     max-width: 600px;
     max-height: 80vh;
     overflow-y: auto;
+    margin: 0;
 
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: pop-upFade 1s ease;
 
-    animation: popupFade 1s ease;
+    position: relative;
 }
 
-@keyframes pop-upFade {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes pop-upFade { 
+    from 
+        { opacity: 0; transform: translateY(-20px); } 
+    to 
+        { opacity: 1; transform: translateY(0); } 
 }
 
 .close {
