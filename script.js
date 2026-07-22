@@ -1,205 +1,329 @@
-/* JavaScript for the responsive navigation menu */
-function toggleMenu() {
-    document
-        .getElementById("nav-links")
-        .classList.toggle("active");
-}
-
-
-/* JavaScript for the slideshow */
-
-const slides = document.querySelectorAll('.slide');
-
-let currentSlide = 0;
-
-const prevButton = document.getElementById('prev');
-const nextButton = document.getElementById('next');
-
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.style.display = (i === index) ? 'block' : 'none';
-    });
-}
-
-prevButton.addEventListener('click', () => {
-    currentSlide = (currentSlide === 0) ? slides.length - 1 : currentSlide - 1;
-    showSlide(currentSlide);
-});
-
-nextButton.addEventListener('click', () => {
-    currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
-    showSlide(currentSlide);
-});
-
-showSlide(0); // Show the first slide initially
-
-setInterval(() => {
-    currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
-    showSlide(currentSlide);
-}, 5000); // This changes slide every 5 seconds
-
-/* JavaScript for the contact form validation */
-const contactForm = document.getElementById('contact-form');
-
-contactForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-    if (name === '' || email === '' || message === '') {
-        alert('Please fill in all fields.');
-    } else if (!validateEmail(email)) {
-        alert('Please enter a valid email address.');
-    } else {
-        alert('Thank you for your message!');
-        contactForm.reset(); // Reset the form after submission
-    }   
-});
-
-// JS for Contact Popup
-function openPopup(id) {
-    document.getElementById(id).classList.add("active");
-}
-
-function closePopup(id) {
-    document.getElementById(id).classList.remove("active");
-}
 document.addEventListener("DOMContentLoaded", () => {
 
-    const form = document.getElementById("contactForm");
+    /* =========================
+       RESPONSIVE NAVIGATION MENU
+    ========================== */
 
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        const counsellor = document.getElementById("counsellor").value;
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
-
-        const subject = `Support Request from ${name}`;
-
-        const body =
-            `Name: ${name}\n` +
-            `Email: ${email}\n\n` +
-            `${message}`;
-
-        window.location.href =
-            `mailto:${counsellor}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    });
-
-});
-
-/* ---------------- POPUPS ---------------- */
-function openPopup(id){
-    document.getElementById(id).style.display = "block";
-
-    // start snake only when popup opens
-    if (id === "snake") startSnake();
-}
-
-function closePopup(id){
-    document.getElementById(id).style.display = "none";
-}
-
-/* ---------------- SNAKE ---------------- */
-let canvas, ctx;
-let snake, dir, food, gameInterval;
-const box = 15;
-
-function startSnake(){
-
-    // prevent multiple intervals stacking
-    if (gameInterval) clearInterval(gameInterval);
-
-    canvas = document.getElementById("game");
-    ctx = canvas.getContext("2d");
-
-    snake = [{x: 5*box, y: 5*box}];
-    dir = "RIGHT";
-    food = spawnFood();
-
-    document.onkeydown = (e) => {
-        if(e.key === "ArrowLeft") dir = "LEFT";
-        if(e.key === "ArrowRight") dir = "RIGHT";
-        if(e.key === "ArrowUp") dir = "UP";
-        if(e.key === "ArrowDown") dir = "DOWN";
+    window.toggleMenu = function () {
+        document
+            .getElementById("nav-links")
+            .classList.toggle("active");
     };
 
-    gameInterval = setInterval(drawGame, 150);
-}
 
-function spawnFood(){
-    return {
-        x: Math.floor(Math.random()*20)*box,
-        y: Math.floor(Math.random()*20)*box
-    };
-}
+    /* =========================
+       SLIDESHOW
+    ========================== */
 
-function drawSnake(){
-    ctx.fillStyle = "lime";
-    snake.forEach(s => ctx.fillRect(s.x, s.y, box, box));
-}
+    const slides = document.querySelectorAll(".slide");
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
 
-function drawGame(){
+    let currentSlide = 0;
 
-    ctx.clearRect(0,0,300,300);
-
-    let head = {...snake[0]};
-
-    if(dir==="LEFT") head.x -= box;
-    if(dir==="RIGHT") head.x += box;
-    if(dir==="UP") head.y -= box;
-    if(dir==="DOWN") head.y += box;
-
-    // restart if hits wall
-    if(head.x < 0 || head.y < 0 || head.x >= 300 || head.y >= 300){
-        startSnake();
-        return;
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? "block" : "none";
+        });
     }
 
-    if(head.x === food.x && head.y === food.y){
-        food = spawnFood();
+    function nextSlide() {
+        currentSlide =
+            currentSlide === slides.length - 1
+            ? 0
+            : currentSlide + 1;
+
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide =
+            currentSlide === 0
+            ? slides.length - 1
+            : currentSlide - 1;
+
+        showSlide(currentSlide);
+    }
+
+    if (slides.length > 0) {
+        showSlide(0);
+
+        nextButton?.addEventListener("click", nextSlide);
+        prevButton?.addEventListener("click", previousSlide);
+
+        setInterval(nextSlide, 5000);
+    }
+
+
+
+    /* =========================
+       CONTACT POPUP
+    ========================== */
+
+    window.openPopup = function (id) {
+        const popup = document.getElementById(id);
+
+        if (!popup) return;
+
+        popup.classList.add("active");
+
+        if (id === "snake") {
+            startSnake();
+        }
+    };
+
+
+    window.closePopup = function (id) {
+        const popup = document.getElementById(id);
+
+        if (!popup) return;
+
+        popup.classList.remove("active");
+    };
+
+
+
+    /* =========================
+       CONTACT FORM
+    ========================== */
+
+    const contactForm = document.getElementById("contact-form");
+
+    if (contactForm) {
+
+        contactForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const counsellor =
+                document.getElementById("counsellor")?.value;
+
+            const name =
+                document.getElementById("name")?.value.trim();
+
+            const email =
+                document.getElementById("email")?.value.trim();
+
+            const message =
+                document.getElementById("message")?.value.trim();
+
+
+            if (!name || !email || !message) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+
+            if (!validateEmail(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+
+            const subject = `Support Request from ${name}`;
+
+            const body =
+                `Name: ${name}\n` +
+                `Email: ${email}\n\n` +
+                `${message}`;
+
+
+            window.location.href =
+                `mailto:${counsellor}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+
+            contactForm.reset();
+
+        });
+    }
+
+
+
+    function validateEmail(email) {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    }
+
+
+
+    /* =========================
+              SNAKE GAME
+    ========================== */
+const gameCanvas = document.querySelector('#gameCanvas');
+const ctx = gameCanvas.getContext('2d');
+const scoreElement = document.querySelector('#score');
+const startButton = document.querySelector('#startButton');
+const restartButton = document.querySelector('#restartButton');
+const gameWidth = gameCanvas.width;
+const gameHeight = gameCanvas.height;
+const cellSize = 20;
+const initialSnakeLength = 3;
+let snake = [];
+let direction = 'right';
+let food = {};
+let score = 0;
+let gameInterval;
+startButton.addEventListener('click', () => {
+    init();
+    startButton.disabled = true;
+    restartButton.disabled = true;
+});
+function init() {
+    snake = []; 
+    for (let i = initialSnakeLength - 1; i >= 0; i--) {
+        snake.push({ x: i * cellSize, y: 0 });
+    }
+    direction = 'right';
+    placeFood();
+    score = 0;
+    scoreElement.textContent = score;
+    clearInterval(gameInterval);
+    gameInterval = setInterval(gameLoop, 100);
+}
+function placeFood() {
+    food = {
+        x: Math.floor(Math.random() * (gameWidth / cellSize)) * cellSize,
+        y: Math.floor(Math.random() * (gameHeight / cellSize)) * cellSize
+    };
+}
+function gameLoop() {
+    const head = { ...snake[0] };
+    switch (direction) {    
+        case 'right': head.x += cellSize; break;
+        case 'left': head.x -= cellSize; break;
+        case 'down': head.y += cellSize; break;
+        case 'up': head.y -= cellSize; break;
+    }
+    if (head.x < 0 || head.x >= gameWidth || head.y < 0 || head.y >= gameHeight || snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+        clearInterval(gameInterval);
+        alert('Game Over! Your score: ' + score);
+        restartButton.disabled = false;
+        return;
+    }   
+    snake.unshift(head);
+    if (head.x === food.x && head.y === food.y) {
+        score++;
+        scoreElement.textContent = score;
+        placeFood();
     } else {
         snake.pop();
     }
-
-    snake.unshift(head);
-
-    ctx.fillStyle = "red";
-    ctx.fillRect(food.x, food.y, box, box);
-
-    drawSnake();
+    draw();
 }
-
-/* ---------------- WORDLE ---------------- */
-const answer = "CODE";
-
-function checkWord(){
-    let g = document.getElementById("guess").value.toUpperCase();
-
-    document.getElementById("wordleResult").innerText =
-        (g === answer) ? "Correct!" : "Try again!";
+function draw() {
+    ctx.clearRect(0, 0, gameWidth, gameHeight);
+    ctx.fillStyle = 'green';
+    snake.forEach(segment => {
+        ctx.fillRect(segment.x, segment.y, cellSize, cellSize);
+    });
+    ctx.fillStyle = 'red';
+    ctx.fillRect(food.x, food.y, cellSize, cellSize);
 }
-
-/* ---------------- RPS ---------------- */
-function play(user){
-    const choices = ["rock","paper","scissors"];
-    const bot = choices[Math.floor(Math.random()*3)];
-
-    let result;
-
-    if(user === bot){
-        result = "Draw!";
-    } else if(
-        (user==="rock" && bot==="scissors") ||
-        (user==="paper" && bot==="rock") ||
-        (user==="scissors" && bot==="paper")
-    ){
-        result = "You win!";
-    } else {
-        result = "You lose!";
+document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+        case 'ArrowUp': if (direction !== 'down') direction = 'up'; break;
+        case 'ArrowDown': if (direction !== 'up') direction = 'down'; break;
+        case 'ArrowLeft': if (direction !== 'right') direction = 'left'; break;
+        case 'ArrowRight': if (direction !== 'left') direction = 'right'; break;
     }
+});
+restartButton.addEventListener('click', () => {
+    init();
+    restartButton.disabled = false;
+});
+startButton.disabled = false;
 
-    document.getElementById("rpsResult").innerText =
-        `Bot chose ${bot}. ${result}`;
-}
+    /* =========================
+              WORDLE
+    ========================== */
+
+    const answer = "CODE";
+
+
+    window.checkWord = function () {
+
+        const guess =
+            document
+            .getElementById("guess")
+            .value
+            .toUpperCase();
+
+
+        document
+        .getElementById("wordleResult")
+        .innerText =
+            guess === answer
+            ? "Correct!"
+            : "Try again!";
+
+    };
+
+
+
+    /* =========================
+          ROCK PAPER SCISSORS
+    ========================== */
+
+    window.play = function (userChoice) {
+
+        const choices = [
+            "rock",
+            "paper",
+            "scissors"
+        ];
+
+
+        const computerChoice =
+            choices[
+                Math.floor(Math.random() * choices.length)
+            ];
+
+
+        let result;
+
+
+        if (userChoice === computerChoice) {
+
+            result = "Draw!";
+
+        }
+
+        else if (
+
+            (userChoice === "rock" &&
+             computerChoice === "scissors")
+
+            ||
+
+            (userChoice === "paper" &&
+             computerChoice === "rock")
+
+            ||
+
+            (userChoice === "scissors" &&
+             computerChoice === "paper")
+
+        ) {
+
+            result = "You win!";
+
+        }
+
+        else {
+
+            result = "You lose!";
+
+        }
+
+
+
+        document
+        .getElementById("rpsResult")
+        .innerText =
+            `Bot chose ${computerChoice}. ${result}`;
+
+    };
+
+
+});
