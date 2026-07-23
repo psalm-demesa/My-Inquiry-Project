@@ -476,3 +476,198 @@ button,.slider-container, .quick-contact {
     cursor: pointer;
     transition: all 0.3s ease;
 }
+/* ===========================
+   GAME SECTION
+=========================== */
+
+.game-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* Game Buttons */
+.game-section button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.game-section button:hover {
+    transform: translateY(-3px);
+    background: #e56b59;
+}
+
+.game-section button:active {
+    transform: scale(.97);
+}
+
+/* ===========================
+   POPUPS
+=========================== */
+
+.snake-popup,
+.wordle-popup,
+.rps-popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(45,52,54,.45);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.snake-popup-content,
+.wordle-popup-content,
+.rps-popup-content {
+    background: var(--secondary-color);
+    width: 90%;
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0,0,0,.2);
+    animation: popupFade .35s ease;
+}
+
+/* Popup animation */
+
+@keyframes popupFade {
+
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+/* Close Button */
+
+.close{
+    position:absolute;
+    top:18px;
+    right:22px;
+    font-size:30px;
+    cursor:pointer;
+    color:var(--text-color);
+    transition:.2s;
+}
+
+.close:hover{
+    color:var(--primary-color);
+    transform:rotate(90deg);
+}
+
+/* Titles */
+
+.snake-popup-content h2,
+.wordle-popup-content h2,
+.rps-popup-content h2{
+    color:var(--primary-color);
+    margin-bottom:20px;
+}
+
+/* ===========================
+   SNAKE
+=========================== */
+
+#game{
+    background:white;
+    border:8px solid var(--accent-color);
+    border-radius:20px;
+    display:block;
+    margin:25px auto;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   WORDLE
+=========================== */
+
+.wordle-popup-content input{
+    width:140px;
+    padding:12px;
+    border:2px solid var(--accent-color);
+    border-radius:15px;
+    text-align:center;
+    font-size:1.2rem;
+    text-transform:uppercase;
+    outline:none;
+    margin:20px 0;
+    transition:.3s;
+}
+
+.wordle-popup-content input:focus{
+    border-color:var(--primary-color);
+}
+
+#wordleResult{
+    margin-top:18px;
+    font-weight:bold;
+    color:var(--text-color);
+}
+
+/* ===========================
+   RPS
+=========================== */
+
+.rps-popup-content button{
+    margin:10px;
+    min-width:110px;
+}
+
+#rpsResult{
+    margin-top:25px;
+    font-size:1.1rem;
+    font-weight:bold;
+    color:var(--text-color);
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px){
+
+    .game-section{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .game-section button{
+        width:240px;
+    }
+
+    .snake-popup-content,
+    .wordle-popup-content,
+    .rps-popup-content{
+        width:95%;
+        padding:25px;
+    }
+
+    #game{
+        width:260px;
+        height:260px;
+    }
+
+}

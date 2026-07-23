@@ -67,92 +67,23 @@
         </svg>
       </div>
      </header>
-
-<!-- Game content will go here -->
-
-<style>
-body {
-    font-family: Arial;
-    text-align: center;
-    background: #0f0f0f;
-    color: white;
-}
-
-h1 {
-    margin-top: 20px;
-    letter-spacing: 2px;
-}
-
-button {
-    padding: 10px 18px;
-    margin: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 6px;
-    background: #222;
-    color: white;
-}
-
-button:hover {
-    background: #333;
-}
-
-/* POPUP */
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(168, 152, 152, 0.85);
-}
-
-.popup-content {
-    background: #1b1b1b;
-    margin: 5% auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 12px;
-}
-
-.close {
-    float: right;
-    cursor: pointer;
-    font-size: 20px;
-    color: #aaa;
-}
-
-.close:hover {
-    color: white;
-}
-
-canvas {
-    background: black;
-    display: block;
-    margin: auto;
-}
-</style>
 </head>
 
 <body>
 
 <!-- Game content -->
 <section class="game-section">
-        <button onclick="openPopup('snake')">
-            Snake
-        </button>
+    <button onclick="openPopup('snake')">
+        🐍 Snake
+    </button>
 
+    <button onclick="openPopup('wordle')">
+        🔤 Wordle
+    </button>
 
-        <button onclick="openPopup('wordle')">
-            Wordle
-        </button>
-
-
-        <button onclick="openPopup('rps')">
-            Rock Paper Scissors
-        </button>
+    <button onclick="openPopup('rps')">
+        ✂️ Rock Paper Scissors
+    </button>
 
 
 
@@ -256,6 +187,6 @@ canvas {
 
         </div>
 </section>
-<script src="script.js"></script>
+<script src="game.js"></script>
 </body>
 </html>
