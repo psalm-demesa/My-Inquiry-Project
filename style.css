@@ -316,6 +316,43 @@ button,.slider-container, .quick-contact {
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+/* Quick Play Games Button */
+.quick-games {
+    background-color: #e46b59;
+    color: white;
+    padding: 30px;
+    max-width: 400px;
+    margin: 4dvh auto;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.quick-games h3 {
+    margin: 0 0 10px;
+    font-size: 1.8rem;
+}
+
+.quick-games p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.games-button {
+    background-color: white;
+    color: #7e613a;
+    border: none;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.games-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
 /*About Page*/
 .about-section {
     padding: 60px 20px;
@@ -495,9 +532,9 @@ button,.slider-container, .quick-contact {
     color: white;
     border: none;
     padding: 14px 28px;
-    border-radius: 50px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 3rem;
     font-weight: bold;
     transition: 0.3s ease;
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
@@ -518,33 +555,22 @@ button,.slider-container, .quick-contact {
 
 .snake-popup,
 .wordle-popup,
-.rps-popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(45,52,54,.45);
+.rps-popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background: rgba(186, 134, 134, 0.4);
     backdrop-filter: blur(5px);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
 }
 
-.snake-popup-content,
-.wordle-popup-content,
-.rps-popup-content {
-    background: var(--secondary-color);
-    width: 90%;
-    max-width: 500px;
-    padding: 35px;
-    border-radius: 25px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 15px 40px rgba(0,0,0,.2);
-    animation: popupFade .35s ease;
+.snake-popup.active,
+.wordle-popup.active,
+.rps-popup.active{
+    display:flex;
 }
-
 /* Popup animation */
 
 @keyframes popupFade {
@@ -563,21 +589,22 @@ button,.slider-container, .quick-contact {
 
 /* Close Button */
 
-.close{
-    position:absolute;
-    top:18px;
-    right:22px;
-    font-size:30px;
-    cursor:pointer;
-    color:var(--text-color);
-    transition:.2s;
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
 }
 
-.close:hover{
-    color:var(--primary-color);
-    transform:rotate(90deg);
+.close:hover {
+    color: var(--primary-color);
+    transform: rotate(90deg);
 }
-
 /* Titles */
 
 .snake-popup-content h2,
