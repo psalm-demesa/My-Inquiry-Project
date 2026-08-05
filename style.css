@@ -141,16 +141,12 @@ button,.slider-container, .quick-contact {
 
 /*Quote Box*/
 .slider-container {
-    transform: translateX(10px);
     position: relative;
-    padding: 30px;
-    width: 90%;
     max-width: 500px;
     background: #F8F4F0;
     padding: 50px 60px;
-    border: none;
-    margin: auto;
-    overflow: hidden;
+    margin: 0 auto;
+    overflow: hidden; 
 }
 .slider {
     background: white;
@@ -165,6 +161,8 @@ button,.slider-container, .quick-contact {
     color: #632727;
     text-align: center;
     margin-bottom: 20px;
+    word-break: break-word;
+    box-sizing: border-box;
 }
 .quote-author {
     font-size: 18px;
