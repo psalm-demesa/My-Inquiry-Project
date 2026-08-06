@@ -111,21 +111,40 @@
              SNAKE
         ========================== -->
 
-        <div id="snake" class="snake-popup">
+<div id="snake" class="snake-popup">
 
-            <div class="snake-popup-content">
+    <div class="snake-popup-content">
 
-                <span class="close" onclick="closePopup('snake')">
-                    &times;
-                </span>
+        <button class="close" onclick="closePopup('snake')">
+            &times;
+        </button>
 
-                <h1>Snake</h1>
+        <h2>Snake</h2>
 
-                <canvas id="game" width="300" height="300"></canvas>
+        <p class="game-instructions">
+            🐍 <strong>How to Play</strong><br>
+            Use the arrow keys to move the snake.<br>
+            Eat the green food to grow longer.<br>
+            Avoid hitting the walls.<br><br>
+        </p>
 
-            </div>
+        <canvas id="game" width="300" height="300"></canvas>
 
-        </div>
+        <div class="snake-controls">
+
+    <button onclick="changeDirection('UP')">⬆️</button>
+
+    <div>
+        <button onclick="changeDirection('LEFT')">⬅️</button>
+        <button onclick="changeDirection('DOWN')">⬇️</button>
+        <button onclick="changeDirection('RIGHT')">➡️</button>
+    </div>
+
+</div>
+
+    </div>
+
+</div>
 
 
         <!-- =========================
@@ -136,9 +155,9 @@
 
             <div class="wordle-popup-content">
 
-                <span class="close" onclick="closePopup('wordle')">
+                <button class="close" onclick="closePopup('wordle')">
                     &times;
-                </span>
+                </button>
 
                 <h2>Wordle</h2>
 
@@ -170,9 +189,9 @@
 
             <div class="rps-popup-content">
 
-                <span class="close" onclick="closePopup('rps')">
+                <button class="close" onclick="closePopup('rps')">
                     &times;
-                </span>
+                </button>
 
                 <h2>Rock Paper Scissors</h2>
 

@@ -3,8 +3,13 @@
 // =========================
 
 function toggleMenu() {
-    document.getElementById("nav-links").classList.toggle("active");
+    const nav = document.getElementById("nav-links");
+
+    if (nav) {
+        nav.classList.toggle("active");
+    }
 }
+
 
 // =========================
 // POPUPS
@@ -22,6 +27,7 @@ function openPopup(id) {
     }
 }
 
+
 function closePopup(id) {
     const popup = document.getElementById(id);
 
@@ -30,11 +36,24 @@ function closePopup(id) {
     popup.classList.remove("active");
 }
 
+
+function closeAllPopups() {
+
+    document.querySelectorAll(
+        ".snake-popup, .wordle-popup, .rps-popup"
+    ).forEach(popup => {
+        popup.classList.remove("active");
+    });
+
+}
+
+
+// Close popup when clicking outside
 window.addEventListener("click", function (e) {
 
     document.querySelectorAll(
-        ".snake-popup,.wordle-popup,.rps-popup"
-    ).forEach(function (popup) {
+        ".snake-popup, .wordle-popup, .rps-popup"
+    ).forEach(popup => {
 
         if (e.target === popup) {
             popup.classList.remove("active");
@@ -44,16 +63,12 @@ window.addEventListener("click", function (e) {
 
 });
 
+
+// Close popup with ESC key
 document.addEventListener("keydown", function (e) {
 
     if (e.key === "Escape") {
-
-        document.querySelectorAll(
-            ".snake-popup,.wordle-popup,.rps-popup"
-        ).forEach(function (popup) {
-            popup.classList.remove("active");
-        });
-
+        closeAllPopups();
     }
 
 });
@@ -62,10 +77,6 @@ document.addEventListener("keydown", function (e) {
 // =========================
 // WORDLE
 // =========================
-
-document.addEventListener("DOMContentLoaded", () => {
-    newWord();
-});
 
 const words = [
     {
@@ -102,51 +113,73 @@ const words = [
     }
 ];
 
+
 let currentWord;
+
 
 function newWord() {
 
-    currentWord =
+    const randomWord =
         words[Math.floor(Math.random() * words.length)];
 
-    document.getElementById("clue").textContent =
-        currentWord.clue;
+    currentWord = randomWord;
 
-    document.getElementById("guess").value = "";
-    document.getElementById("wordleResult").textContent = "";
+
+    const clue = document.getElementById("clue");
+    const guess = document.getElementById("guess");
+    const result = document.getElementById("wordleResult");
+
+
+    if (clue) clue.textContent = currentWord.clue;
+    if (guess) guess.value = "";
+    if (result) result.textContent = "";
 
 }
 
+
 function checkWord() {
 
-    const guess = document
-        .getElementById("guess")
-        .value
-        .toUpperCase();
-
+    const guessInput = document.getElementById("guess");
     const result = document.getElementById("wordleResult");
 
+
+    if (!guessInput || !result) return;
+
+
+    const guess =
+        guessInput.value.toUpperCase();
+
+
     if (guess.length !== currentWord.word.length) {
+
         result.innerHTML =
             `Please enter a ${currentWord.word.length}-letter word.`;
+
         return;
     }
+
 
     let output = "";
     let correct = 0;
 
+
     for (let i = 0; i < guess.length; i++) {
+
 
         if (guess[i] === currentWord.word[i]) {
 
             output += "🟩 ";
             correct++;
 
-        } else if (currentWord.word.includes(guess[i])) {
+        }
+
+        else if (currentWord.word.includes(guess[i])) {
 
             output += "🟨 ";
 
-        } else {
+        }
+
+        else {
 
             output += "⬜ ";
 
@@ -154,19 +187,34 @@ function checkWord() {
 
     }
 
+
     result.innerHTML = `
         <p>${output}</p>
-        <p><strong>Correct letters:</strong> ${correct}/${currentWord.word.length}</p>
+        <p>
+            <strong>Correct letters:</strong>
+            ${correct}/${currentWord.word.length}
+        </p>
     `;
+
 
     if (guess === currentWord.word) {
 
-        result.innerHTML += "<p>🎉 Correct!</p>";
+        result.innerHTML +=
+            "<p>🎉 Correct!</p>";
 
         setTimeout(newWord, 2000);
+
     }
 
 }
+
+
+// Start Wordle after page loads
+document.addEventListener("DOMContentLoaded", () => {
+
+    newWord();
+
+});
 
 
 // =========================
@@ -175,12 +223,17 @@ function checkWord() {
 
 function play(playerChoice) {
 
-    const choices = ["rock", "paper", "scissors"];
+
+    const choices =
+        ["rock", "paper", "scissors"];
+
 
     const computer =
-        choices[Math.floor(Math.random() * 3)];
+        choices[Math.floor(Math.random() * choices.length)];
 
-    let result = "";
+
+    let result;
+
 
     if (playerChoice === computer) {
 
@@ -190,9 +243,14 @@ function play(playerChoice) {
 
     else if (
 
-        (playerChoice === "rock" && computer === "scissors") ||
-        (playerChoice === "paper" && computer === "rock") ||
-        (playerChoice === "scissors" && computer === "paper")
+        (playerChoice === "rock" &&
+        computer === "scissors") ||
+
+        (playerChoice === "paper" &&
+        computer === "rock") ||
+
+        (playerChoice === "scissors" &&
+        computer === "paper")
 
     ) {
 
@@ -206,39 +264,71 @@ function play(playerChoice) {
 
     }
 
-    document.getElementById("rpsResult").innerHTML =
 
-        `You chose <b>${playerChoice}</b><br>
-         Computer chose <b>${computer}</b><br><br>
-         ${result}`;
+    const output =
+        document.getElementById("rpsResult");
+
+
+    if (output) {
+
+        output.innerHTML = `
+            You chose <b>${playerChoice}</b><br>
+            Computer chose <b>${computer}</b><br><br>
+            ${result}
+        `;
+
+    }
 
 }
-
 
 
 // =========================
 // SNAKE
 // =========================
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const canvas =
+    document.getElementById("game");
+
+
+let ctx = null;
+
+
+if (canvas) {
+
+    ctx = canvas.getContext("2d");
+
+}
+
 
 const grid = 15;
 
-let snake;
-let direction;
+
+let snake = [];
+let direction = "RIGHT";
 let food;
 let gameLoop;
 
+
+
 function startSnake() {
+
+
+    if (!canvas || !ctx) return;
+
 
     clearInterval(gameLoop);
 
+
     snake = [
-        { x: 150, y: 150 }
+        {
+            x: 150,
+            y: 150
+        }
     ];
 
+
     direction = "RIGHT";
+
 
     food = {
 
@@ -247,30 +337,57 @@ function startSnake() {
 
     };
 
-    gameLoop = setInterval(drawSnake, 120);
+
+    gameLoop =
+        setInterval(drawSnake, 120);
 
 }
 
-document.addEventListener("keydown", function (e) {
 
-    if (e.key === "ArrowUp" && direction !== "DOWN")
+
+document.addEventListener("keydown", function(e) {
+
+
+    if (e.key === "ArrowUp" && direction !== "DOWN") {
         direction = "UP";
+    }
 
-    if (e.key === "ArrowDown" && direction !== "UP")
+
+    if (e.key === "ArrowDown" && direction !== "UP") {
         direction = "DOWN";
+    }
 
-    if (e.key === "ArrowLeft" && direction !== "RIGHT")
+
+    if (e.key === "ArrowLeft" && direction !== "RIGHT") {
         direction = "LEFT";
+    }
 
-    if (e.key === "ArrowRight" && direction !== "LEFT")
+
+    if (e.key === "ArrowRight" && direction !== "LEFT") {
         direction = "RIGHT";
+    }
+
 
 });
 
+
+
 function drawSnake() {
 
+
+    if (!ctx || !canvas) return;
+
+
     ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
 
     let head = {
 
@@ -279,14 +396,22 @@ function drawSnake() {
 
     };
 
+
     if (direction === "UP") head.y -= grid;
     if (direction === "DOWN") head.y += grid;
     if (direction === "LEFT") head.x -= grid;
     if (direction === "RIGHT") head.x += grid;
 
+
+
     snake.unshift(head);
 
-    if (head.x === food.x && head.y === food.y) {
+
+
+    if (
+        head.x === food.x &&
+        head.y === food.y
+    ) {
 
         food = {
 
@@ -302,6 +427,8 @@ function drawSnake() {
         snake.pop();
 
     }
+
+
 
     if (
 
@@ -320,16 +447,32 @@ function drawSnake() {
 
     }
 
+
+
     ctx.fillStyle = "#F47C67";
 
-    snake.forEach(function (part) {
 
-        ctx.fillRect(part.x, part.y, grid - 1, grid - 1);
+    snake.forEach(part => {
+
+        ctx.fillRect(
+            part.x,
+            part.y,
+            grid - 1,
+            grid - 1
+        );
 
     });
 
+
+
     ctx.fillStyle = "#8FCB9B";
 
-    ctx.fillRect(food.x, food.y, grid - 1, grid - 1);
+
+    ctx.fillRect(
+        food.x,
+        food.y,
+        grid - 1,
+        grid - 1
+    );
 
 }

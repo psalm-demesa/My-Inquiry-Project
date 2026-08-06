@@ -17,26 +17,138 @@ body {
 button,.slider-container, .quick-contact {
     border-radius: 15px;
 }
+/* ===========================
+   MOBILE
+=========================== */
 
+@media(max-width:768px){
+
+
+    .navbar {
+
+        height:60px;
+
+        width:calc(100% - 25px);
+
+        padding:8px 18px;
+
+    }
+
+
+    .logo {
+
+        font-size:24px;
+
+    }
+
+
+    .logo-img {
+
+        height:32px;
+
+    }
+
+
+}
 /* Navigation Bar */
+
 .navbar {
     background-color: #d73939;
 
     display: flex;
-
     justify-content: space-between;
     align-items: center;
 
-    
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-   
-    width: 97%;
-    padding: 15px 30px;
-    
+
+    width: 94%;
+    margin: 10px 20px;
+
+    padding: 12px 25px;
+
+    border-radius: 25px;
+
     z-index: 9999;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+    animation: navSlide 0.8s ease forwards;
+}
+
+
+@keyframes navSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Logo animation */
+
+.logo {
+    display:flex;
+    align-items:center;
+
+    font-size:40px;
+    font-weight:bold;
+    color:white;
+
+    transition:0.4s ease;
+}
+
+
+.logo:hover {
+    transform: scale(1.5);
+}
+
+
+/* Links animation */
+
+.nav-links a {
+    color:white;
+    text-decoration:none;
+
+    font-size:20px;
+
+    position:relative;
+    transition:0.3s ease;
+}
+
+
+/* underline animation */
+
+.nav-links a::after {
+    content:"";
+
+    position:absolute;
+    left:0;
+    bottom:-6px;
+
+    width:0%;
+    height:3px;
+
+    background:white;
+
+    transition:0.3s ease;
+}
+
+
+.nav-links a:hover::after {
+    width:100%;
+}
+
+
+.nav-links a:hover {
+    transform:translateY(-3px);
+    color:#300404;
 }
 
 /* Logo */
@@ -142,11 +254,14 @@ button,.slider-container, .quick-contact {
 /*Quote Box*/
 .slider-container {
     position: relative;
-    max-width: 500px;
-    background: #F8F4F0;
+    width: 500px;
+    background:transparent;
     padding: 50px 60px;
     margin: 0 auto;
     overflow: hidden; 
+    display: flex;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 .slider {
     background: white;
@@ -589,14 +704,19 @@ button,.slider-container, .quick-contact {
 
 .close {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--text-color);
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     cursor: pointer;
-    transition: 0.3s;
-    user-select: none;
+    font-size: 30px;
 }
 
 .close:hover {
@@ -604,12 +724,54 @@ button,.slider-container, .quick-contact {
     transform: rotate(90deg);
 }
 /* Titles */
-
+.snake-popup-content,
+.wordle-popup-content,
+.rps-popup-content {
+    position: relative;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 600px;
+    height: auto;
+    max-height: 80vh;
+}
+.game-instructions {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
 .snake-popup-content h2,
 .wordle-popup-content h2,
 .rps-popup-content h2{
     color:var(--primary-color);
     margin-bottom:20px;
+}
+.snake-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.snake-controls div {
+    display: flex;
+    gap: 5px;
+}
+
+.snake-controls button {
+    width: 50px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.snake-controls button:active {
+    transform: scale(0.9);
 }
 
 /* ===========================
