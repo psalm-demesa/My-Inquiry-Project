@@ -64,8 +64,9 @@ button,.slider-container, .quick-contact {
     top: 0;
     left: 0;
 
-    width: 94%;
-    margin: 10px 20px;
+    width: calc(100% - 40px);
+    max-width: 1400px;
+    margin: 10px auto;
 
     padding: 12px 25px;
 
@@ -255,7 +256,7 @@ button,.slider-container, .quick-contact {
 /*Quote Box*/
 .slider-container {
     position: relative;
-    width: 500px;
+    width: min(500px, 90%);
     height: 350px;
 
     background:transparent;
@@ -283,15 +284,16 @@ button,.slider-container, .quick-contact {
 
 /*Quote Text & Author*/
 .quote{
-    font-size: 24px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     color: #632727;
     text-align: center;
     margin-bottom: 20px;
     word-break: break-word;
-    box-sizing: border-box;
+    overflow-wrap: break-word;
+    line-height: 1.5;
 }
 .quote-author {
-    font-size: 18px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     color: #632727;
     text-align: center;
     font-style: italic;
@@ -316,8 +318,8 @@ button,.slider-container, .quick-contact {
 
     .quick-contact,
     .slider-container {
-        width: 100%;
-        max-width: 100%;
+        width: min(500px, 90%);
+        height: 350px;
     }
 
 }
@@ -402,13 +404,13 @@ button,.slider-container, .quick-contact {
 }
 
 .welcome-section h1 {
-    font-size: 4rem;
+    font-size: clamp(2.2rem, 6vw, 4rem);
     margin-top: 100px;
     margin-bottom: 20px;
 }
 
 .welcome-section p {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 2vw, 1.5rem);
 }
 
 .page-button {
@@ -504,45 +506,100 @@ button,.slider-container, .quick-contact {
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/*About Page*/
+/* ===========================
+   ABOUT PAGE - RESPONSIVE
+=========================== */
+
 .about-section {
-    padding: 60px 20px;
-    width: 100%;
+    width: 90%;
     max-width: 900px;
-    margin-top: 200px;
-    margin: 0 auto;
-    color: #632727;
-}
-.about-section h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-.about-section p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-.offer-box, .values-box {
-    background-color: #e46b59;
-    color: white;
-    padding: 30px;
-    margin-bottom: 40px;
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.offer-box h1, .values-box h1 {
-    margin: 0 0 20px;
-    font-size: 1.8rem;
-}
-.offer-box ul, .values-box ul {
-    list-style: none;
-    padding: 0;
-}
-.offer-box ul li, .values-box ul li {
-    margin-bottom: 10px;
-    font-size: 1.1rem;
+    margin: 100px auto 40px;
+    padding: 30px 10px;
+    box-sizing: border-box;
 }
 
+.about-section h1 {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.about-section p {
+    font-size: clamp(0.95rem, 4vw, 1.2rem);
+    line-height: 1.6;
+
+    /* Prevents long words from overflowing */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.offer-box,
+.values-box {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 25px 20px;
+    margin-bottom: 25px;
+
+    border-radius: 18px;
+}
+
+.offer-box h1,
+.values-box h1 {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+    line-height: 1.3;
+}
+
+.offer-box ul li,
+.values-box ul li {
+    font-size: clamp(0.9rem, 3.8vw, 1.1rem);
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
+
+
+/* ===========================
+   SMALL PHONES
+=========================== */
+
+@media (max-width: 480px) {
+
+    .about-section {
+        width: 92%;
+        margin-top: 90px;
+        padding: 25px 5px;
+         color: #4d1e1e;
+    }
+
+    .about-section h1 {
+        font-size: 1.9rem;
+        color: #4d1e1e;
+    }
+
+    .about-section p {
+        font-size: 1rem;
+        line-height: 1.55;
+         color: #813838;
+    }
+
+    .offer-box,
+    .values-box {
+        padding: 22px 18px;
+        background: #f8f4f0;
+    }
+
+    .offer-box h1,
+    .values-box h1 {
+        font-size: 1.45rem;
+        color: #813838;
+    }
+
+    .offer-box ul li,
+    .values-box ul li {
+        font-size: 0.95rem;
+        color: #813838;
+    }
+}
 /*Resources and Support Page*/
 .resources-content {
     display: flex;
@@ -769,9 +826,9 @@ button,.slider-container, .quick-contact {
     background: white;
     padding: 30px;
     border-radius: 20px;
-    width: 600px;
-    height: auto;
-    max-height: 80vh;
+    width: min(600px, 95vw);
+    max-height: 90vh;
+    overflow-y: auto;
 }
 .game-instructions {
     margin-top: 15px;
@@ -821,6 +878,8 @@ button,.slider-container, .quick-contact {
     border:8px solid var(--accent-color);
     border-radius:20px;
     display:block;
+    width: min(300px, 80vw);
+    height: min(300px, 80vw);
     margin:25px auto;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
@@ -872,27 +931,46 @@ button,.slider-container, .quick-contact {
    MOBILE
 =========================== */
 
-@media (max-width:768px){
+@media (max-width: 480px) {
 
-    .game-section{
-        flex-direction:column;
-        align-items:center;
+    .navbar {
+        width: calc(100% - 20px);
+        padding: 8px 15px;
     }
 
-    .game-section button{
-        width:240px;
+    .welcome-section {
+        padding: 30px 15px 120px;
     }
 
-    .snake-popup-content,
-    .wordle-popup-content,
-    .rps-popup-content{
-        width:95%;
-        padding:25px;
+    .welcome-section h1 {
+        font-size: 2.2rem;
     }
 
-    #game{
-        width:260px;
-        height:260px;
+    .welcome-section p {
+        font-size: 1rem;
     }
 
+    .waves {
+        height: 90px;
+    }
+
+    .game-section {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .game-section button {
+        min-height: 90px;
+    }
+
+    .game-popup-content {
+        padding: 25px 15px;
+    }
+
+    #game {
+        width: 80vw;
+        height: 80vw;
+        max-width: 300px;
+        max-height: 300px;
+    }
 }
