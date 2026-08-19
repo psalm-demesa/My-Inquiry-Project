@@ -436,7 +436,8 @@ button,.slider-container, .quick-contact {
     background-color: #e46b59;
     color: white;
     padding: 30px;
-    max-width: 500px;
+    width: min(400px, 90%);
+    height: 150px;
     margin: 40px auto;
     border-radius: 20px;
     text-align: center;
