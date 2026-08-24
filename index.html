@@ -77,6 +77,7 @@
         </div>
     <!-- Quote Section -->
      <div class="slider-container">
+        
         <div id="slider" class="slider">
             <!--Slide 1-->
             <div class="slide">
@@ -103,13 +104,50 @@
                 <h2 class="quote">"You don't have to control your thoughts. You just have to stop letting them control you."</h2>
                 <p class="quote-author">- Dan Millman</p>
             </div>
-
+            
             <!--Buttons-->
-            <div class="buttons">
+            <div class="quote-buttons">
                 <button id="prev">&#10094;</button>
                 <button id="next">&#10095;</button>
             </div>
         </div>
+           <button class="submit-quote-button" onclick="openQuoteForm()">
+             Submit a Quote
+            </button>
+
+            <div id="quoteForm" class="quote-form">
+
+            <div class="quote-form-content">
+
+                <button class="quote-close" onclick="closeQuoteForm()">
+                    &times;
+                </button>
+
+                <h2>Share Your Quote</h2>
+
+                <textarea
+                    id="userQuote"
+                    maxlength="100"
+                    placeholder="Write your quote here..."
+                ></textarea>
+
+                <input
+                    type="text"
+                    id="quoteAuthor"
+                    maxlength="30"
+                    placeholder="Your name (optional)"
+                >
+
+                <button class="submit-quote" onclick="submitQuote()">
+                    Submit Quote
+                </button>
+
+                <p id="quoteMessage"></p>
+
+            </div>
+
+            </div>
+
     </div>
 </div>
 </section>

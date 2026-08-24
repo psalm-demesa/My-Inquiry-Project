@@ -62,13 +62,14 @@ button,.slider-container, .quick-contact {
 
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
 
     width: calc(100% - 40px);
     max-width: 1400px;
-    margin: 10px auto;
 
-    padding: 12px 25px;
+    margin: 10px 0;
+    padding: 18px 25px;
 
     border-radius: 25px;
 
@@ -79,16 +80,15 @@ button,.slider-container, .quick-contact {
     animation: navSlide 0.8s ease forwards;
 }
 
-
 @keyframes navSlide {
     from {
         opacity: 0;
-        transform: translateY(-40px);
+        transform: translateX(-50%) translateY(-40px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(-50%) translateY(0);
     }
 }
 
@@ -165,20 +165,25 @@ button,.slider-container, .quick-contact {
 }
 
 /* Logo Image */
-.logo-img {
-    height: 50px;
-    width: auto;
+.logo {
+    position: absolute;
+    left: 25px;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 40px;
+    font-weight: bold;
+    color: #f2f2f2;
 }
 
-/* Nav Links Container */
 .nav-links {
     list-style: none;
 
-    overflow: hidden;
     display: flex;
     gap: 30px;
 
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
 }
 
@@ -269,23 +274,32 @@ button,.slider-container, .quick-contact {
     flex-shrink: 0;
     box-sizing: border-box;
 }
+.quote-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 15px;
+}
 .slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
     background: white;
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 /*Quote Text & Author*/
 .quote{
-    font-size: clamp(0.75rem, 2.5vw, 1.5rem);
+    font-size: clamp(0.70rem, 2.5vw, 1.25rem);
     color: #632727;
     text-align: center;
     margin-bottom: 20px;
@@ -299,7 +313,127 @@ button,.slider-container, .quick-contact {
     text-align: center;
     font-style: italic;
 }
+/**Quote Submission Form*/
 
+.submit-quote-button {
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+
+    background: #e46b59;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 50px;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+
+.quote-form {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(186, 134, 134, 0.4);
+    backdrop-filter: blur(5px);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10000;
+}
+
+.quote-form.active {
+    display: flex;
+}
+
+.quote-form-content {
+    position: relative;
+
+    background: #eecfca;
+
+    width: min(500px, 90%);
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+    text-align: center;
+}
+
+.quote-form-content h2 {
+    color: #632727;
+}
+
+#userQuote,
+#quoteAuthor {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px;
+
+    margin-top: 10px;
+
+    border: 2px solid #D8E2DC;
+    border-radius: 15px;
+
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1rem;
+
+    outline: none;
+}
+
+#userQuote {
+    height: 120px;
+    resize: none;
+}
+
+#userQuote:focus,
+#quoteAuthor:focus {
+    border-color: #e46b59;
+}
+
+.submit-quote {
+    margin-top: 15px;
+
+    background-color: #e46b59;
+    color: white;
+
+    border: none;
+    padding: 12px 25px;
+
+    border-radius: 50px;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.quote-close {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #e46b59;
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
 /*Content Section*/
 .content-row {
     display: flex;
@@ -688,12 +822,45 @@ button,.slider-container, .quick-contact {
         { opacity: 1; transform: translateY(0); } 
 }
 
+/* ===========================
+   CLOSE BUTTON
+=========================== */
+
 .close {
-    float: right;
-    font-size: 28px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    width: 35px !important;
+    min-width: 35px !important;
+    height: 35px;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #e46b59;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     cursor: pointer;
+    font-size: 25px;
+    line-height: 1;
+
+    box-sizing: border-box;
+    transition: 0.3s ease;
 }
 
+.close:hover {
+    background: #d73939 !important;
+    color: white;
+    transform: rotate(90deg) scale(1.1);
+}
 /*Games and Relaxing Tools Section*/
 .games-and-tools {
     background-color: #e46b59;
@@ -797,29 +964,6 @@ button,.slider-container, .quick-contact {
 
 }
 
-/* Close Button */
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 9999;
-
-    width: 35px;
-    height: 35px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-    font-size: 30px;
-}
-
-.close:hover {
-    color: var(--primary-color);
-    transform: rotate(90deg);
-}
 /* Titles */
 .snake-popup-content,
 .wordle-popup-content,
@@ -844,31 +988,39 @@ button,.slider-container, .quick-contact {
     margin-bottom:20px;
 }
 .snake-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    margin-top: 15px;
+    display: none;
 }
 
-.snake-controls div {
-    display: flex;
-    gap: 5px;
-}
+@media screen and (max-width: 768px) {
 
-.snake-controls button {
-    width: 50px;
-    height: 40px;
-    border: none;
-    border-radius: 8px;
-    background: var(--primary-color);
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
+    .snake-controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        margin-top: 15px;
+    }
 
-.snake-controls button:active {
-    transform: scale(0.9);
+    .snake-controls div {
+        display: flex;
+        gap: 5px;
+    }
+
+    .snake-controls button {
+        width: 50px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        background: var(--primary-color);
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .snake-controls button:active {
+        transform: scale(0.9);
+    }
 }
 
 /* ===========================
@@ -976,4 +1128,62 @@ button,.slider-container, .quick-contact {
         max-width: 300px;
         max-height: 300px;
     }
+}
+
+body.game-open .navbar {
+    display: none;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.slide.active {
+    display: flex;
+}
+
+.slide .quote {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+
+.slide .quote-author {
+    width: 100%;
+    text-align: center;
+
+    margin: 0;
+    padding: 0;
+
+    display: block;
+}
+
+.submit-quote-button {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 10;
+
+    background: #e46b59;
+    color: white;
+    border: none;
+
+    padding: 12px 25px;
+    border-radius: 50px;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
 }

@@ -21,6 +21,7 @@ function openPopup(id) {
     if (!popup) return;
 
     popup.classList.add("active");
+    document.body.classList.add("game-open");
 
     if (id === "snake") {
         startSnake();
@@ -34,6 +35,7 @@ function closePopup(id) {
     if (!popup) return;
 
     popup.classList.remove("active");
+    document.body.classList.remove("game-open");
 }
 
 
@@ -43,6 +45,7 @@ function closeAllPopups() {
         ".snake-popup, .wordle-popup, .rps-popup"
     ).forEach(popup => {
         popup.classList.remove("active");
+        document.body.classList.remove("game-open");
     });
 
 }
@@ -344,33 +347,55 @@ function startSnake() {
 }
 
 
+document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowUp") {
+        changeDirection("UP");
+    }
+    else if (event.key === "ArrowDown") {
+        changeDirection("DOWN");
+    }
+    else if (event.key === "ArrowLeft") {
+        changeDirection("LEFT");
+    }
+    else if (event.key === "ArrowRight") {
+        changeDirection("RIGHT");
+    }
+});
+function changeDirection(newDirection) {
 
-document.addEventListener("keydown", function(e) {
-
-
-    if (e.key === "ArrowUp" && direction !== "DOWN") {
+    // Prevent the snake from instantly reversing
+    if (newDirection === "UP" && direction !== "DOWN") {
         direction = "UP";
     }
 
-
-    if (e.key === "ArrowDown" && direction !== "UP") {
+    else if (newDirection === "DOWN" && direction !== "UP") {
         direction = "DOWN";
     }
 
-
-    if (e.key === "ArrowLeft" && direction !== "RIGHT") {
+    else if (newDirection === "LEFT" && direction !== "RIGHT") {
         direction = "LEFT";
     }
 
-
-    if (e.key === "ArrowRight" && direction !== "LEFT") {
+    else if (newDirection === "RIGHT" && direction !== "LEFT") {
         direction = "RIGHT";
     }
 
+}
+// =========================
+// SNAKE MOBILE CONTROLS
+// =========================
+
+document.querySelectorAll(".snake-controls button").forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        const newDirection = this.dataset.direction;
+
+        changeDirection(newDirection);
+
+    });
 
 });
-
-
 
 function drawSnake() {
 

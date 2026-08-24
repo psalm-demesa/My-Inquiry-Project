@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================
-       RESPONSIVE NAVIGATION
+       NAVIGATION
     ========================= */
 
     window.toggleMenu = function () {
-        document.getElementById("nav-links").classList.toggle("active");
+        const menu = document.getElementById("nav-links");
+
+        if (menu) {
+            menu.classList.toggle("active");
+        }
     };
 
 
@@ -13,21 +17,44 @@ document.addEventListener("DOMContentLoaded", function () {
        SLIDESHOW
     ========================= */
 
-    const slides = document.querySelectorAll(".slide");
-    const prevButton = document.getElementById("prev");
-    const nextButton = document.getElementById("next");
-
     let currentSlide = 0;
+
+    function getSlides() {
+        return document.querySelectorAll(".slide");
+    }
 
     function showSlide(index) {
 
-        slides.forEach((slide, i) => {
-            slide.style.display = i === index ? "block" : "none";
-        });
+        const slides = getSlides();
 
+        if (slides.length === 0) return;
+
+        if (index >= slides.length) {
+            currentSlide = 0;
+        }
+
+        if (index < 0) {
+            currentSlide = slides.length - 1;
+        }
+
+        slides.forEach(function (slide, i) {
+
+            if (i === currentSlide) {
+                slide.style.display = "flex";
+            } else {
+                slide.style.display = "none";
+            }
+
+        });
     }
 
+
     function nextSlide() {
+
+        const slides = getSlides();
+
+        if (slides.length === 0) return;
+
         currentSlide++;
 
         if (currentSlide >= slides.length) {
@@ -37,7 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
         showSlide(currentSlide);
     }
 
+
     function previousSlide() {
+
+        const slides = getSlides();
+
+        if (slides.length === 0) return;
+
         currentSlide--;
 
         if (currentSlide < 0) {
@@ -47,103 +80,271 @@ document.addEventListener("DOMContentLoaded", function () {
         showSlide(currentSlide);
     }
 
-    if (slides.length > 0) {
 
-        showSlide(0);
+    const nextButton = document.getElementById("next");
+    const prevButton = document.getElementById("prev");
 
-        nextButton?.addEventListener("click", nextSlide);
-        prevButton?.addEventListener("click", previousSlide);
 
-        setInterval(nextSlide, 5000);
+    if (nextButton) {
+        nextButton.addEventListener("click", nextSlide);
+    }
 
+    if (prevButton) {
+        prevButton.addEventListener("click", previousSlide);
     }
 
 
+    /* Start slideshow */
+
+    showSlide(0);
+
+
+    /* Automatic slideshow */
+
+    setInterval(function () {
+        nextSlide();
+    }, 5000);
+
+
     /* =========================
-       POPUPS
+       QUOTE POPUP
     ========================= */
 
-    window.openPopup = function (id) {
+    window.openQuoteForm = function () {
 
-        const popup = document.getElementById(id);
+        const form = document.getElementById("quoteForm");
 
-        if (!popup) return;
-
-        popup.classList.add("active");
-
-        if (id === "snake" && typeof startSnake === "function") {
-            startSnake();
+        if (form) {
+            form.classList.add("active");
         }
 
     };
 
-    window.closePopup = function (id) {
 
-        const popup = document.getElementById(id);
+    window.closeQuoteForm = function () {
 
-        if (!popup) return;
+        const form = document.getElementById("quoteForm");
 
-        popup.classList.remove("active");
+        if (form) {
+            form.classList.remove("active");
+        }
 
     };
 
-    window.addEventListener("click", function (e) {
 
-        document.querySelectorAll(".snake-popup,.wordle-popup,.rps-popup,.pop-up")
-            .forEach(function (popup) {
+    /* =========================
+       SUBMIT QUOTE
+    ========================= */
 
-                if (e.target === popup) {
-                    popup.classList.remove("active");
-                }
+    window.submitQuote = function () {
 
-            });
+        const quoteInput =
+            document.getElementById("userQuote");
+
+        const authorInput =
+            document.getElementById("quoteAuthor");
+
+        const message =
+            document.getElementById("quoteMessage");
+
+
+        const quote =
+            quoteInput.value.trim();
+
+        const author =
+            authorInput.value.trim();
+
+
+        /* Don't allow empty quotes */
+
+        if (quote === "") {
+
+            message.textContent =
+                "Please enter a quote.";
+
+            return;
+        }
+
+
+        /* =========================
+           CREATE NEW SLIDE
+        ========================= */
+
+        const newSlide =
+            document.createElement("div");
+
+        newSlide.className = "slide";
+
+
+        const quoteElement =
+            document.createElement("h2");
+
+        quoteElement.className = "quote";
+
+        quoteElement.textContent =
+            `"${quote}"`;
+
+
+        const authorElement =
+            document.createElement("p");
+
+        authorElement.className =
+            "quote-author";
+
+        authorElement.textContent =
+            "- " + (author || "Anonymous");
+
+
+        newSlide.appendChild(quoteElement);
+        newSlide.appendChild(authorElement);
+
+
+        /* =========================
+           ADD SLIDE
+        ========================= */
+
+        const slider =
+            document.getElementById("slider");
+
+        const buttons =
+            slider.querySelector(".quote-buttons");
+
+
+        slider.insertBefore(
+            newSlide,
+            buttons
+        );
+
+
+        /* =========================
+           SAVE QUOTE
+        ========================= */
+
+        let savedQuotes =
+            JSON.parse(
+                localStorage.getItem("quotes")
+            ) || [];
+
+
+        savedQuotes.push({
+            quote: quote,
+            author: author || "Anonymous"
+        });
+
+
+        localStorage.setItem(
+            "quotes",
+            JSON.stringify(savedQuotes)
+        );
+
+
+        /* =========================
+           RESET FORM
+        ========================= */
+
+        quoteInput.value = "";
+        authorInput.value = "";
+        message.textContent = "";
+
+
+        /* =========================
+           CLOSE POPUP
+        ========================= */
+
+        closeQuoteForm();
+
+
+        /* =========================
+           SHOW NEW SLIDE
+        ========================= */
+
+        const slides = getSlides();
+
+        currentSlide = slides.length - 1;
+
+        showSlide(currentSlide);
+
+    };
+
+
+    /* =========================
+       LOAD SAVED QUOTES
+    ========================= */
+
+    const savedQuotes =
+        JSON.parse(
+            localStorage.getItem("quotes")
+        ) || [];
+
+
+    savedQuotes.forEach(function (item) {
+
+        const newSlide =
+            document.createElement("div");
+
+        newSlide.className = "slide";
+
+
+        const quoteElement =
+            document.createElement("h2");
+
+        quoteElement.className = "quote";
+
+        quoteElement.textContent =
+            `"${item.quote}"`;
+
+
+        const authorElement =
+            document.createElement("p");
+
+        authorElement.className =
+            "quote-author";
+
+        authorElement.textContent =
+            "- " + item.author;
+
+
+        newSlide.appendChild(quoteElement);
+        newSlide.appendChild(authorElement);
+
+
+        const slider =
+            document.getElementById("slider");
+
+        const buttons =
+            slider.querySelector(".quote-buttons");
+
+
+        slider.insertBefore(
+            newSlide,
+            buttons
+        );
 
     });
 
 
     /* =========================
-       CONTACT FORM
+       CLOSE POPUP WHEN CLICKING
+       OUTSIDE
     ========================= */
 
-    const contactForm = document.getElementById("contact-form");
+    const quoteForm =
+        document.getElementById("quoteForm");
 
-    if (contactForm) {
 
-        contactForm.addEventListener("submit", function (event) {
+    if (quoteForm) {
 
-            event.preventDefault();
+        quoteForm.addEventListener(
+            "click",
+            function (event) {
 
-            const counsellor = document.getElementById("counsellor").value;
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const message = document.getElementById("message").value.trim();
+                if (event.target === quoteForm) {
+                    closeQuoteForm();
+                }
 
-            if (!name || !email || !message) {
-                alert("Please fill in all fields.");
-                return;
             }
+        );
 
-            if (!validateEmail(email)) {
-                alert("Please enter a valid email address.");
-                return;
-            }
-
-            const subject = `Support Request from ${name}`;
-
-            const body =
-                `Name: ${name}\nEmail: ${email}\n\n${message}`;
-
-            window.location.href =
-                `mailto:${counsellor}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-            contactForm.reset();
-
-        });
-
-    }
-
-    function validateEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
 });
