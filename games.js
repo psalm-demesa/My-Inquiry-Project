@@ -501,3 +501,23 @@ function drawSnake() {
     );
 
 }
+
+// =========================
+// SNAKE RESTART BUTTON
+// =========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const restartSnakeButton = document.getElementById("restartBtn");
+
+    if (restartSnakeButton) {
+
+        restartSnakeButton.addEventListener("click", function () {
+
+            startSnake();
+
+        });
+
+    }
+
+});
