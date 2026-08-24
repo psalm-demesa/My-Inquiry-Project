@@ -348,3 +348,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+function openPopup(id) {
+    const popup = document.getElementById(id);
+
+    if (popup) {
+        popup.classList.add("active");
+    }
+}
+
+function closePopup(id) {
+    const popup = document.getElementById(id);
+
+    if (popup) {
+        popup.classList.remove("active");
+    }
+}
+
+function toggleMenu() {
+    const navLinks = document.getElementById("nav-links");
+
+    if (navLinks) {
+        navLinks.classList.toggle("active");
+    }
+}
