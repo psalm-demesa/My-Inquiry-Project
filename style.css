@@ -1240,3 +1240,262 @@ body.game-open .navbar {
 #restartBtn:hover {
     transform: none;
 }
+/* =========================
+   MOOD TRACKER POPUP
+========================= */
+
+.mood-popup {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    /* SOLID OVERLAY */
+    background: rgba(45, 52, 54, 0.65);
+
+    z-index: 99999;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+}
+
+.mood-popup.active {
+    display: flex;
+}
+
+
+/* =========================
+   POPUP BOX
+========================= */
+
+.mood-content {
+    background: #F8F4F0 !important;
+
+    width: 90%;
+    max-width: 520px;
+
+    padding: 35px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    position: relative;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+    box-sizing: border-box;
+}
+
+
+/* TITLE */
+
+.mood-content h2 {
+    color: #632727;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.mood-subtitle {
+    color: #555;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   MOOD OPTIONS
+========================= */
+
+.mood-options {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin: 25px 0 30px;
+}
+
+.mood-options button {
+
+    width: 75px;
+
+    padding: 12px 5px;
+
+    background: #ffffff !important;
+
+    border: 2px solid transparent;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    font-family: "Trebuchet MS", sans-serif;
+
+    color: #2D3436;
+}
+
+.mood-options button:hover {
+
+    transform: translateY(-4px);
+
+    border-color: #e46b59;
+}
+
+.mood-options button.selected {
+
+    border-color: #e46b59;
+
+    background: #fff1ed !important;
+
+    transform: translateY(-4px);
+}
+
+.emoji {
+
+    display: block;
+
+    font-size: 30px;
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================
+   REASONS
+========================= */
+
+.mood-content h3 {
+
+    color: #813838;
+
+    font-size: 18px;
+
+    margin-bottom: 15px;
+}
+
+.mood-reasons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.mood-reasons label {
+
+    background: #ffffff !important;
+
+    color: #2D3436;
+
+    padding: 9px 13px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+.mood-reasons input {
+
+    accent-color: #e46b59;
+}
+
+
+/* =========================
+   CONTINUE BUTTON
+========================= */
+
+.save-mood {
+
+    background: #e46b59 !important;
+
+    color: white !important;
+
+    border: none;
+
+    padding: 13px 30px;
+
+    border-radius: 20px;
+
+    font-family: "Trebuchet MS", sans-serif;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.save-mood:hover {
+
+    background: #d85c4b !important;
+
+    transform: translateY(-2px);
+}
+
+
+/* MESSAGE */
+
+#mood-message {
+
+    color: #632727;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .mood-content {
+
+        width: 95%;
+
+        padding: 25px 18px;
+
+        max-height: 90vh;
+
+        overflow-y: auto;
+    }
+
+    .mood-options {
+
+        gap: 7px;
+    }
+
+    .mood-options button {
+
+        width: 65px;
+    }
+
+    .emoji {
+
+        font-size: 25px;
+    }
+
+}

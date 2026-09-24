@@ -372,3 +372,107 @@ function toggleMenu() {
         navLinks.classList.toggle("active");
     }
 }
+let selectedMood = "";
+
+
+/* SELECT MOOD */
+
+function selectMood(mood, button) {
+
+    selectedMood = mood;
+
+    document
+        .querySelectorAll(".mood-options button")
+        .forEach(function(btn) {
+
+            btn.classList.remove("selected");
+
+        });
+
+    button.classList.add("selected");
+
+}
+
+
+/* SAVE CHECK-IN */
+
+function saveMood() {
+
+    const message =
+        document.getElementById("mood-message");
+
+
+    if (selectedMood === "") {
+
+        message.textContent =
+            "Please choose a mood before continuing.";
+
+        return;
+
+    }
+
+
+    const reasons = [];
+
+    document
+        .querySelectorAll(".mood-reasons input:checked")
+        .forEach(function(checkbox) {
+
+            reasons.push(checkbox.value);
+
+        });
+
+
+    const checkIn = {
+
+        mood: selectedMood,
+
+        reasons: reasons,
+
+        date: new Date().toLocaleDateString()
+
+    };
+
+
+    let moodData =
+        JSON.parse(
+            localStorage.getItem("moodData")
+        ) || [];
+
+
+    moodData.push(checkIn);
+
+
+    localStorage.setItem(
+        "moodData",
+        JSON.stringify(moodData)
+    );
+
+
+    message.textContent =
+        "✓ Check-in saved!";
+
+
+    setTimeout(function() {
+
+        document
+            .getElementById("mood-popup")
+            .classList.remove("active");
+
+    }, 700);
+
+}
+
+
+/* OPEN AUTOMATICALLY */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        document
+            .getElementById("mood-popup")
+            .classList.add("active");
+
+    }
+);

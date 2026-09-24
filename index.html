@@ -153,6 +153,85 @@
     </div>
 </div>
 </section>
+<div id="mood-popup" class="mood-popup">
+
+    <div class="mood-content">
+
+        <h2>♡ How are you feeling today?</h2>
+
+        <p class="mood-subtitle">
+            Take a moment to check in with yourself.
+        </p>
+
+        <div class="mood-options">
+
+            <button onclick="selectMood('Great', this)">
+                <span class="emoji">😄</span>
+                <span>Great</span>
+            </button>
+
+            <button onclick="selectMood('Good', this)">
+                <span class="emoji">🙂</span>
+                <span>Good</span>
+            </button>
+
+            <button onclick="selectMood('Okay', this)">
+                <span class="emoji">😐</span>
+                <span>Okay</span>
+            </button>
+
+            <button onclick="selectMood('Not great', this)">
+                <span class="emoji">😕</span>
+                <span>Not great</span>
+            </button>
+
+            <button onclick="selectMood('Low', this)">
+                <span class="emoji">😔</span>
+                <span>Low</span>
+            </button>
+
+        </div>
+
+        <h3>What's affecting your mood?</h3>
+
+        <div class="mood-reasons">
+
+            <label>
+                <input type="checkbox" value="School">
+                School
+            </label>
+
+            <label>
+                <input type="checkbox" value="Friends">
+                Friends
+            </label>
+
+            <label>
+                <input type="checkbox" value="Family">
+                Family
+            </label>
+
+            <label>
+                <input type="checkbox" value="Sleep">
+                Sleep
+            </label>
+
+            <label>
+                <input type="checkbox" value="Other">
+                Other
+            </label>
+
+        </div>
+
+        <button class="save-mood" onclick="saveMood()">
+            Continue
+        </button>
+
+        <p id="mood-message"></p>
+
+    </div>
+
+</div>
 </section>
 <script src="script.js"></script>
 </body>
