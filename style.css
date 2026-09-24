@@ -583,6 +583,12 @@ button,.slider-container, .quick-contact {
 
 
 /*Quick Contact Button*/
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
 .quick-contact {
     background-color: #e46b59;
     color: white;
@@ -1186,7 +1192,7 @@ body.game-open .navbar {
 
 .submit-quote-button {
     position: absolute;
-    bottom: 15px;
+    bottom: 1.5px;
     left: 50%;
     transform: translateX(-50%);
 
