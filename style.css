@@ -458,6 +458,7 @@ button,.slider-container, .quick-contact {
     align-items: center;
     gap: 0px;
     margin-top: 2px;
+    left: 20px;
 }
 
 @media (max-width: 768px) {
@@ -465,7 +466,7 @@ button,.slider-container, .quick-contact {
     .content-row {
         flex-direction: column;
         gap: 20px;
-        padding: 0 15px;
+        padding: 15 15px;
     }
 
     .quick-contact,
